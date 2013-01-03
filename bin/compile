@@ -34,7 +34,7 @@ fi
 
 BP_URL="http://heroku-buildpack-testing.s3.amazonaws.com/apache-$APACHE_VERSION-php-$PHP_VERSION-v$BUILDPACK_VERSION.tar.gz"
 echo "-----> Bundling Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"
-curl --silent --max-time 60 --location "$BP_URL" | tar xz
+curl --max-time 60 --location "$BP_URL" | tar xz
 
 # echo "-----> Extracting bsdiff binary"
 # tar xzf $LP_DIR/src/bsdiff.tgz
