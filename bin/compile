@@ -60,7 +60,7 @@ if [ -f www/composer.json ]; then
   echo "-----> Installing Composer dependencies"
   COMPOSER_URL="http://getcomposer.org/composer.phar"
   curl --silent --max-time 60 --location "$COMPOSER_URL" > composer.phar
-  bin/php composer.phar install
+  /app/php/bin/php composer.phar install
 fi
 
 export LD_LIBRARY_PATH=$BUILD_DIR/local/lib
