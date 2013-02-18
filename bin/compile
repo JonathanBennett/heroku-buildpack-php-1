@@ -32,14 +32,6 @@ if [ -f www/Procfile ]; then
   mv www/Procfile .
 fi
 
-echo "-----> Checking for Composer dependencies"
-# check if we have Composer dependencies
-if [ -f www/composer.json ]; then
-  echo "-----> Installing Composer dependencies"
-  COMPOSER_URL="http://getcomposer.org/composer.phar"
-  curl --silent --max-time 60 --location "$COMPOSER_URL" > composer.phar
-  /app/php/bin/php composer.phar install
-fi
 
 BP_URL="http://heroku-buildpack-testing.s3.amazonaws.com/apache-$APACHE_VERSION-php-$PHP_VERSION-v$BUILDPACK_VERSION.tar.gz"
 echo "-----> Bundling Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"
@@ -60,6 +52,16 @@ cp $LP_DIR/conf/php.ini php
 # make php available on bin
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
+
+
+echo "-----> Checking for Composer dependencies"
+# check if we have Composer dependencies
+if [ -f www/composer.json ]; then
+  echo "-----> Installing Composer dependencies"
+  COMPOSER_URL="http://getcomposer.org/composer.phar"
+  curl --silent --max-time 60 --location "$COMPOSER_URL" > composer.phar
+  /app/php/bin/php composer.phar install
+fi
 
 export LD_LIBRARY_PATH=$BUILD_DIR/local/lib
 
